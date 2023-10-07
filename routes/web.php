@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnunciosController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnuncioController; 
+use App\Http\Controllers\AnuncioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,10 @@ use App\Http\Controllers\AnuncioController;
 |
 */
 
-Route::get('/', 'HomeController@index', function () {
-    return view('welcome');
-});
 
-Route::get('/anuncios', [AnuncioController::class, 'mostrarAnuncios']); 
+
+Route::get('/', [AnunciosController::class, 'mostrarAnuncios']);
+Route::get('/detalle/{idAnuncio}',[AnunciosController::class, 'detailAd'])->name('detailAd');
+Route::get('/crear-anuncio',[AnunciosController::class, 'createAd'])->name('createAd');
+Route::post('/crear-anuncio',[AnunciosController::class, 'storeAd'])->name('storeAd');
+

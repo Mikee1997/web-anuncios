@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('title');
+            $table->text('short_description');
+            $table->text('long_description');
+            $table->string('phone');
+            $table->string('email');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
