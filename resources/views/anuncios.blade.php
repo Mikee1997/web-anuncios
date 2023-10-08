@@ -1,7 +1,7 @@
 @extends('layout')
 <!--resources/views/anuncios_blade.php-->
 @section('content')
-    <h1>Listado de Anuncios <a href="{{route('createAd')}}">Crear Anuncio</a></h1>
+    <h1>Listado de Anuncios <a href="{{auth()->user()?route('dashboard'):route('login')}}">{{auth()->user()?__('Dashboard'):__('Login')}}</a></h1>
     <div class="content">
         <div class="row">
             @foreach ($anuncios as $anuncio)

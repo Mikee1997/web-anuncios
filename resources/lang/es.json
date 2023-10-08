@@ -1,0 +1,22 @@
+{
+    "Dashboard":"Panel de control",
+    "You're logged in!":"Has entrado!",
+    "This is a secure area of the application. Please confirm your password before continuing.":"Esta es un area restringida de la aplicación, Por favor confirma tu contraseña para continuar",
+    "Password":"Contraseña",
+    "Confirm":"Confirmar",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.":"¿Has olvidado tu contraseña? No hay problemam, introduce tu email y te enviaremos un enlace para reestablecerla.",
+    "Email":"Email",
+    "Email Password Reset Link":"Link de restablecimiento de contraseña",
+    "Name":"Nombre",
+    "Confirm password":"Confirmar contraseña",
+    "Register":"Registrar",
+    "Reset Password":"Restablecer contraseña",
+    "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.":"Gracias por registrarte, antes de empezar debes verificar tu email, clicando en elenlace que te hemos enviado.",
+    "A new verification link has been sent to the email address you provided during registration.":"Un nuevo enlace de verificación ha sido enviado a tu email.",
+    "Resend Verification Email":"Reenviar enlace de verificación",
+    "Log Out":"Salir",
+    "Profile":"Perfil",
+    "Delete Account":"Borrar cuenta",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"Una vez tu cuenta sea eliminada, todos los datos seran eliminados permanentemente, Antes de borrar tu cuenta, por favor guarda toda la información que desees conservar.",
+    "Your ads":"Tus anuncios"
+}
