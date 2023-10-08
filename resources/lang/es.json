@@ -18,5 +18,29 @@
     "Profile":"Perfil",
     "Delete Account":"Borrar cuenta",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"Una vez tu cuenta sea eliminada, todos los datos seran eliminados permanentemente, Antes de borrar tu cuenta, por favor guarda toda la información que desees conservar.",
-    "Your ads":"Tus anuncios"
+    "Your ads":"Tus anuncios",
+    "Title":"Titulo",
+    "Update your account's profile information and email address.": "Actualiza la informacion de tu cuenta y dirección de email",
+    "Update Password": "Actualizar contraseña",
+    "Ensure your account is using a long, random password to stay secure.": "Asegúrate de que tu cuenta usa contraseña larga y aleatoria para mantener la seguridad",
+    "Current Password": "Contraseña actual",
+    "New Password": "Nueva contraseña",
+    "Confirm Password": "Confirmar contraseña",
+   "Are you sure you want to delete your account" : "¿Estás seguro de que quieres borrar la contraseña?",
+
+   "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account." : "Una vez eliminada tu cuenta, todos sus recursos y datos se borrarán permanentemente. Introduzca su contraseña para confirmar que desea eliminar definitivament,e su cuenta.",
+   "Are you sure you want to delete your account?": "¿Estás seguro de que quieres borrar tu cuenta?",
+   "Save": "Guardar",
+   "Save2": "Guardar",
+   "Profile Information": "Información del perfil",
+   "created at":"Creado el",
+   "updated at" :"Actualizado el",
+   "Actions": "Acciones",
+   "Edit": "Editar",
+   "Delete": "Borrar"
+
+
 }
+
+
+
