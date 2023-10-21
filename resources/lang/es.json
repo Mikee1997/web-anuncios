@@ -37,8 +37,12 @@
    "updated at" :"Actualizado el",
    "Actions": "Acciones",
    "Edit": "Editar",
-   "Delete": "Borrar"
+   "Delete": "Borrar",
+    "Back":"Volver",
+    "Edit ad":"Editar anuncio",
+    "Create ad":"Crear anuncio",
 
+    "These credentials do not match our records.":"Contraseña incorrecta."
 
 }
 

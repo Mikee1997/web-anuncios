@@ -33,7 +33,7 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('dashboard') }}">{{ __('back') }}</a>
+    <a href="{{ route('dashboard') }}">{{ __('Back') }}</a>
     <form action="{{ isset($anuncio) ? route('ad.update',$anuncio) : route('storeAd') }}" method="POST">
         @csrf
         @if (isset($anuncio))
@@ -49,7 +49,7 @@
         <input required type="tel" id="phone" name="phone" value="{{$anuncio->phone??''}}"/>
         <label for="email">Email:</label>
         <input required type="email" id="email" name="email" value="{{$anuncio->email??''}}" />
-        <input type="submit" value="{{isset($anuncio) ?__('edit ad'):__('create ad')}}" />
+        <input type="submit" value="{{isset($anuncio) ?__('Edit ad'):__('Create ad')}}" />
 
     </form>
 @endsection
