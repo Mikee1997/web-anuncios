@@ -17,10 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [AnunciosController::class, 'mostrarAnuncios']);
+Route::get('/', [AnunciosController::class, 'mostrarAnuncios'])->name('index');
 Route::get('/detalle/{idAnuncio}', [AnunciosController::class, 'detailAd'])->name('detailAd');
-Route::get('/crear-anuncio', [AnunciosController::class, 'createAd'])->name('createAd');
-Route::post('/crear-anuncio', [AnunciosController::class, 'storeAd'])->name('storeAd');
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -31,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::name('ad.')->group(function () {
+        Route::get('/crear-anuncio', [AnunciosController::class, 'createAd'])->name('create');
+        Route::post('/crear-anuncio', [AnunciosController::class, 'storeAd'])->name('store');
         Route::get('/anuncio/{id}', [AnunciosController::class, 'edit'])->name('edit');
         Route::patch('/anuncio/{id}', [AnunciosController::class, 'update'])->name('update');
         Route::delete('/anuncio/{id}', [AnunciosController::class, 'destroy'])->name('delete');

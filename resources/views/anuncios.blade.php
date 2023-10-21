@@ -1,12 +1,19 @@
 @extends('layout')
 <!--resources/views/anuncios_blade.php-->
 @section('content')
-    <h1>Listado de Anuncios <a href="{{auth()->user()?route('dashboard'):route('login')}}">{{auth()->user()?__('Dashboard'):__('Login')}}</a></h1>
+
     <div class="content">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
+            <h1 class="text-center">Listado de Anuncios
+            </h1>
+        </div>
+        <div class="row d-flex justify-content-center">
             @foreach ($anuncios as $anuncio)
-                <div class="col-3 bg-primary m-3">
-                    <a href="{{route('detailAd',$anuncio->id)}}">
+                <div class="col-3 bg-primary m-3 anuncio">
+                    <a href="{{ route('detailAd', $anuncio->id) }}">
+                        @if (isset($anuncio->imagen))
+                            <img src="{{ $anuncio->imagen }}" alt="Imagen">
+                        @endif
                         <h2 class="text-light">{{ $anuncio->title }}</h2>
                         <p class="text-body-secondary">{{ $anuncio->short_description }}</p>
                     </a>

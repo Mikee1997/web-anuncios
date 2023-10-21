@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __('Your ads') }}
+                    {{ __('Your ads') }} <a class="btn btn-primary" href="{{route('ad.create')}}">{{__('Create ad')}}</a>
                 </div>
                 <div class="p-6 text-gray-900">
                     @if ($anuncios->count() > 0)
@@ -38,18 +38,18 @@
                                         {{$anuncio->updated_at}}
                                     </td>
                                     <td>
-                                        <a href="{{route('ad.edit',$anuncio->id)}}">{{__('Edit')}}</a>
+                                        <a class="btn btn-primary" href="{{route('ad.edit',$anuncio->id)}}">{{__('Edit')}}</a>
                                         <form action="{{route('ad.delete',$anuncio->id)}}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <input type="submit" value="{{__('Delete')}}"/>
+                                            <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
                     @else
-                        <a href="{{route('createAd')}}">{{__('Create your first ad')}}</a>
+                        <a href="{{route('ad.create')}}">{{__('Create your first ad')}}</a>
                     @endif
                 </div>
             </div>

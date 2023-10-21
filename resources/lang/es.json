@@ -15,6 +15,7 @@
     "A new verification link has been sent to the email address you provided during registration.":"Un nuevo enlace de verificación ha sido enviado a tu email.",
     "Resend Verification Email":"Reenviar enlace de verificación",
     "Log Out":"Salir",
+    "Log In":"Iniciar Sesion",
     "Profile":"Perfil",
     "Delete Account":"Borrar cuenta",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"Una vez tu cuenta sea eliminada, todos los datos seran eliminados permanentemente, Antes de borrar tu cuenta, por favor guarda toda la información que desees conservar.",
@@ -43,6 +44,7 @@
     "Create ad":"Crear anuncio",
 
     "These credentials do not match our records.":"Contraseña incorrecta."
+
 
 }
 
