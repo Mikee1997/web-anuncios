@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{auth()->user()?__('Dashboard'):__('Log In') }}
                     </x-nav-link>
+                    @if(auth()->user() && auth()->user()->type=='admin')
+                    <x-nav-link :href="route('pickPoints.index')" :active="request()->routeIs('dashboard')">
+                        {{__('Pick up point') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
             @if (auth()->user())

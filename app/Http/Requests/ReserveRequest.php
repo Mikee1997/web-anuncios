@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestAd extends FormRequest
+class ReserveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,6 @@ class RequestAd extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required',
-            'short_description'=>'required',
-            'long_description'=>'required',
-            'phone'=>'required',
-            'email'=>'required',
             'pickpoint'=>'required',
         ];
     }

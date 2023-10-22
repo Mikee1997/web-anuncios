@@ -11,6 +11,13 @@
     @foreach($anuncio->getMedia('imagenes') as $imagen)
         <img class="imageproduct" src="{{ $imagen->getUrl() }}" alt="Imagen">
     @endforeach
+    @if(auth()->user())
+        @if(auth()->user()->id!=$anuncio->user_id)
+            <a class="btn btn-primary" href="{{route('ad.reserve',$anuncio->id)}}">{{__('Reservar')}}</a>
+        @endif
+    @else
+        <a class="btn btn-primary" href="{{route('login')}}">{{__('Inicia sesión para reservar')}}</a>
+    @endif
 </div>
 
 

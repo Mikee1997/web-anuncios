@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestAd extends FormRequest
+class RequestPickPoint extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,8 @@ class RequestAd extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'required',
-            'short_description'=>'required',
-            'long_description'=>'required',
-            'phone'=>'required',
-            'email'=>'required',
-            'pickpoint'=>'required',
+            'name'=>'required',
+            'direccion'=>'required',
         ];
     }
 }

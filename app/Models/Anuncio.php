@@ -13,4 +13,8 @@ class Anuncio extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $guarded = [];
+
+    public function user(){
+        return User::find($this->user_id);
+    }
 }
