@@ -9,9 +9,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EmailReserve extends Mailable
+class EmailRecieve extends Mailable
 {
     use Queueable, SerializesModels;
+
     private $anuncio;
 
     /**
@@ -19,7 +20,7 @@ class EmailReserve extends Mailable
      */
     public function __construct($anuncio)
     {
-        $this->anuncio=$anuncio;
+        $this->anuncio = $anuncio;
     }
 
     /**
@@ -28,7 +29,7 @@ class EmailReserve extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu anuncio '.$this->anuncio->title.' ha sido reservado',
+            subject: 'Ya pouedes pasar a recoger tu reserva',
         );
     }
 
@@ -38,7 +39,7 @@ class EmailReserve extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.reserva',
+            view: 'emails.recieve',
             with:['anuncio'=>$this->anuncio]
         );
     }

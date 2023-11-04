@@ -19,6 +19,9 @@
                     <x-nav-link :href="route('pickPoints.index')" :active="request()->routeIs('dashboard')">
                         {{__('Pick up point') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('pickPoints.recogidas')" :active="request()->routeIs('dashboard')">
+                        {{__('Recogidas') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

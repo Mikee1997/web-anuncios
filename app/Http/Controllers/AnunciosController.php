@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestAd;
 use App\Http\Requests\ReserveRequest;
+use App\Mail\EmailReserve;
 use App\Models\PickPoint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Anuncio;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +18,7 @@ class AnunciosController extends Controller
 {
     public function mostrarAnuncios()
     {
-        $anuncios = Anuncio::all()->map(function ($anuncio) {
+        $anuncios = Anuncio::where('state','publicado')->get()->map(function ($anuncio) {
             $imagenes = $anuncio->getMedia('imagenes');
             if (isset($imagenes) && count($imagenes) > 0) {
                 $anuncio->imagen = $imagenes[0]->getUrl();
@@ -36,7 +38,7 @@ class AnunciosController extends Controller
     public function createAd()
     {
         $pickPoints = PickPoint::all();
-        return view('formulario_anuncio', compact('pickPoints'));
+        return view('ad.formulario_anuncio', compact('pickPoints'));
     }
 
     public function edit($id)
@@ -44,7 +46,7 @@ class AnunciosController extends Controller
         $anuncio = Anuncio::find($id);
         $pickPoints = PickPoint::all();
 
-        return view('formulario_anuncio', compact('anuncio', 'pickPoints'));
+        return view('ad.formulario_anuncio', compact('anuncio', 'pickPoints'));
     }
 
     public function update(RequestAd $request, $id)
@@ -113,19 +115,23 @@ class AnunciosController extends Controller
     public function reserve($id)
     {
         $anuncio = Anuncio::find($id);
+        if($anuncio->state!='publicado')abort(404);
         $idsPickPoints = json_decode($anuncio->pick_points);
         $pickPoints = PickPoint::whereIn('id', $idsPickPoints)->get();
         return view('ad.reserve', compact('anuncio', 'pickPoints'));
     }
 
     public function reserveSave(ReserveRequest $request, $id){
+
         $anuncio = Anuncio::find($id);
+        if($anuncio->state!='publicado')abort(404);
         $anuncio->pickpoint_selected=$request->pickpoint;
         $anuncio->buyer_id=auth()->user()->id;
         $anuncio->state='reserved';
+        $anuncio->reserved_at=Carbon::now();
         $anuncio->save();
 
-        Mail::to($anuncio->user()->email)->send(new EmailReserve($anuncio));
+        Mail::to($anuncio->user->email)->send(new EmailReserve($anuncio));
 
         return view('ad.thanks');
     }

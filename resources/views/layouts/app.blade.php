@@ -15,7 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite([ 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
@@ -31,6 +31,39 @@
             </header>
         @endif
 
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                @if (is_array(session('success')))
+                    <ul>
+                        @foreach (session('success') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    {{ session('success') }}
+                @endif
+            </div>
+        @endif
+        @if (isset($errores))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -39,6 +72,7 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
+    @stack('js')
 </body>
 
 </html>

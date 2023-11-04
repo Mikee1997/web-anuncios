@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestPickPoint;
+use App\Mail\EmailDelivered;
+use App\Mail\EmailRecieve;
+use App\Models\Anuncio;
 use App\Models\PickPoint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PickPointController extends Controller
 {
-    public function index(){
-        $pickPoints=PickPoint::all();
-        return view("pickpoints.index",compact("pickPoints"));
+    public function index()
+    {
+        $pickPoints = PickPoint::all();
+        return view("pickpoints.index", compact("pickPoints"));
     }
 
     public function create()
@@ -60,10 +66,44 @@ class PickPointController extends Controller
 
 
         if (isset($pickPoint)) {
-            return redirect()->route('pickPoints.edit',$pickPoint->id)->withSuccess(['Punto de recogida creado correctamente']);
+            return redirect()->route('pickPoints.edit', $pickPoint->id)->withSuccess(['Punto de recogida creado correctamente']);
         } else {
             return redirect()->to(route('pickPoints.create'))->with(['errores' => ['Ocurrió un error al crear el punto de recogida']]);
 
         }
+    }
+
+    public function recogidas()
+    {
+        $anunciosReservados = Anuncio::where('state', 'reserved')->get();
+        $anunciosPteRecogida = Anuncio::where('state', 'pte-recogida')->get();
+
+        return view('pickpoints.recogidas', compact('anunciosReservados', 'anunciosPteRecogida'));
+    }
+
+    public function recieve(Request $request, $id)
+    {
+        $anuncio = Anuncio::find($id);
+        if ($anuncio->state != 'reserved')
+            abort(404);
+        $anuncio->state = 'pte-recogida';
+        $anuncio->available_at = Carbon::now();
+        $anuncio->save();
+        Mail::to($anuncio->buyer->email)->send(new EmailRecieve($anuncio));
+
+        return redirect()->route('pickPoints.recogidas')->withSuccess(['El articulo ha sido recibido']);
+    }
+
+    public function delive(Request $request, $id)
+    {
+        $anuncio = Anuncio::find($id);
+        if ($anuncio->state != 'pte-recogida')
+            abort(404);
+        $anuncio->state = 'delivered';
+        $anuncio->dalivered_at = Carbon::now();
+        $anuncio->save();
+        Mail::to($anuncio->user->email)->send(new EmailDelivered($anuncio));
+
+        return redirect()->route('pickPoints.recogidas')->withSuccess(['El articulo ha sido entregado']);
     }
 }

@@ -14,7 +14,19 @@ class Anuncio extends Model implements HasMedia
 
     protected $guarded = [];
 
+    protected $dates = ["reserved_at",'available_at','dalivered_at'];
+
     public function user(){
-        return User::find($this->user_id);
+        return $this->belongsTo(User::class,"user_id",'id');
+        //return User::find($this->user_id);
+    }
+
+    public function buyer(){
+        return $this->belongsTo(User::class,"buyer_id",'id');
+        //return User::find($this->user_id);
+    }
+
+    public function pickPoint(){
+        return $this->hasOne(PickPoint::class,"id","pickpoint_selected");
     }
 }

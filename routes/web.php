@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/anuncio/{id}', [AnunciosController::class, 'edit'])->name('edit');
         Route::patch('/anuncio/{id}', [AnunciosController::class, 'update'])->name('update');
         Route::delete('/anuncio/{id}', [AnunciosController::class, 'destroy'])->name('delete');
-        Route::get('/reservar-anuncio{id}', [AnunciosController::class, 'reserve'])->name('reserve');
-        Route::post('/reservar-anuncio{id}', [AnunciosController::class, 'reserveSave'])->name('reserveSave');
+        Route::get('/reservar-anuncio/{id}', [AnunciosController::class, 'reserve'])->name('reserve');
+        Route::post('/reservar-anuncio/{id}', [AnunciosController::class, 'reserveSave'])->name('reserveSave');
 
 
     });
@@ -46,12 +46,18 @@ Route::middleware('auth')->group(function () {
     Route::
     //middleware('admin')->
     name('pickPoints.')->group(function () {
-        Route::get('pickpoint', [PickPointController::class, 'index'])->name('index');
-        Route::get('/crear-pickpoint', [PickPointController::class, 'create'])->name('create');
-        Route::post('/crear-pickpoint', [PickPointController::class, 'store'])->name('store');
-        Route::get('/pickpoint/{id}', [PickPointController::class, 'edit'])->name('edit');
-        Route::patch('/pickpoint/{id}', [PickPointController::class, 'update'])->name('update');
-        Route::delete('/pickpoint/{id}', [PickPointController::class, 'destroy'])->name('delete');
+        Route::get('pickpoint', [PickPointController::class, 'index'])->name('index')->middleware('admin');
+        Route::get('/crear-pickpoint', [PickPointController::class, 'create'])->name('create')->middleware('admin');
+        Route::post('/crear-pickpoint', [PickPointController::class, 'store'])->name('store')->middleware('admin');
+        Route::get('/pickpoint/{id}', [PickPointController::class, 'edit'])->name('edit')->middleware('admin');
+        Route::patch('/pickpoint/{id}', [PickPointController::class, 'update'])->name('update')->middleware('admin');
+        Route::delete('/pickpoint/{id}', [PickPointController::class, 'destroy'])->name('delete')->middleware('admin');
+        Route::get('recogidas', [PickPointController::class, 'recogidas'])->name('recogidas')->middleware('admin');
+        Route::post('/recibir/{id}', [PickPointController::class, 'recieve'])->name('recieve')->middleware('admin');
+        Route::post('/entregar/{id}', [PickPointController::class, 'delive'])->name('delive')->middleware('admin');
+
+
+
     });
 });
 
