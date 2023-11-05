@@ -1,8 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Recogidas') }}
-        </h2>
+        <div class="flex justify-between h-16">
+            <div class="flex sm:items-center">
+
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Recogidas') }}
+                </h2>
+            </div>
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <label for="pickpoint">Selecciona punto de recogida:</label>
+                <form action="{{route('pickPoints.recogidas')}}" method='GET'>
+                    @csrf
+                    <select name="pickpoint" id="pickpoint">
+                        @foreach ($pickPoints as $pickpoint )
+                            <option {{$selectedPickPoint==$pickpoint->id?'selected':''}} value="{{$pickpoint->id}}">{{$pickpoint->name}}</option>
+                        @endforeach
+                    </select>
+                </form>
+
+            </div>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -11,6 +28,7 @@
                 <div class="tab">
                     <button class="tablinks active" onclick="openTab(event, 'reservados')">Reservados</button>
                     <button class="tablinks" onclick="openTab(event, 'pte-recogida')">Pendiente recogida</button>
+                    <button class="tablinks" onclick="openTab(event, 'delivered')">Historico de entregados</button>
                 </div>
 
                 <div id="reservados" class="tabcontent" style="display: block">
@@ -45,8 +63,9 @@
                                             <form action="{{ route('pickPoints.recieve', $anuncio->id) }}"
                                                 method="post">
                                                 @csrf
-                                                <input class="btn btn-primary" type="submit"
-                                                    value="{{ __('Recibir') }}" />
+                                                <input class="btn btn-primary btn-confirm"
+                                                    confirm-text="¿Esta seguro de recepcionar {{ $anuncio->title }}?"
+                                                    disabled type="submit" value="{{ __('Recibir') }}" />
                                             </form>
                                         </td>
                                     </tr>
@@ -90,8 +109,9 @@
                                             <form action="{{ route('pickPoints.delive', $anuncio->id) }}"
                                                 method="post">
                                                 @csrf
-                                                <input class="btn btn-primary" type="submit"
-                                                    value="{{ __('Entregar') }}" />
+                                                <input class="btn btn-primary btn-confirm"
+                                                    confirm-text="¿Esta seguro de entregar {{ $anuncio->title }}?"
+                                                    disabled type="submit" value="{{ __('Entregar') }}" />
                                             </form>
                                         </td>
                                     </tr>
@@ -102,6 +122,44 @@
                         @endif
                     </div>
                 </div>
+
+                <div id="delivered" class="tabcontent">
+                    <div class="p-6 text-gray-900">
+                        @if ($anunciosEntregados->count() > 0)
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>
+                                        {{ __('Titulo') }}
+                                    </th>
+                                    <th>
+                                        {{ __('vendedor') }}
+                                    </th>
+                                    <th>
+                                        {{ __('comprador') }}
+                                    </th>
+                                </tr>
+                                @foreach ($anunciosEntregados as $anuncio)
+                                    <tr>
+                                        <td>
+                                            {{ $anuncio->title }}
+                                        </td>
+                                        <td>
+                                            {{ $anuncio->user->name }}
+                                        </td>
+                                        <td>
+                                            {{ $anuncio->buyer->name }}
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </table>
+                        @else
+                            <p>{{ __('No hay anuncios entregados') }}</p>
+                        @endif
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

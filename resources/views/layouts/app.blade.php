@@ -15,6 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
+
     @vite(['resources/js/app.js'])
 </head>
 
@@ -69,9 +71,26 @@
             {{ $slot }}
         </main>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        id="confirmation-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="myModalLabel">¿Esta seguro de eliminar?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
     @stack('js')
 </body>
 

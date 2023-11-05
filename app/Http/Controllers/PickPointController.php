@@ -73,12 +73,21 @@ class PickPointController extends Controller
         }
     }
 
-    public function recogidas()
+    public function recogidas(Request $request)
     {
-        $anunciosReservados = Anuncio::where('state', 'reserved')->get();
-        $anunciosPteRecogida = Anuncio::where('state', 'pte-recogida')->get();
+        $pickPoints = PickPoint::all();
+        if($request->has('pickpoint')){
+            $pickpoint=$request->pickpoint;
+        }else{
+            $pickpoint=$pickPoints->first()->id;
+        }
+        $anunciosReservados = Anuncio::where('state', 'reserved')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
+        $anunciosPteRecogida = Anuncio::where('state', 'pte-recogida')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
+        $anunciosEntregados = Anuncio::where('state', 'delivered')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
 
-        return view('pickpoints.recogidas', compact('anunciosReservados', 'anunciosPteRecogida'));
+
+
+        return view('pickpoints.recogidas', compact('anunciosReservados', 'anunciosPteRecogida','anunciosEntregados','pickPoints')+['selectedPickPoint'=>$pickpoint]);
     }
 
     public function recieve(Request $request, $id)
