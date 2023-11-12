@@ -113,12 +113,11 @@
                                                                                 <tr>
                                                                                     <td align="left"
                                                                                         class="esd-block-text">
-                                                                                        <p>Tu anuncio {{$anuncio->title}} ha sido
-                                                                                            reservado.</p>
+                                                                                        <p>{{__('Your ad')}} {{$anuncio->title}} {{__('has been reserved')}}.</p>
                                                                                         <p><br></p>
-                                                                                        <p>Debes entregarlo antes del
-                                                                                            {{$anuncio->reserved_at->addDays(3)->format('d/m/Y')}} en {{$anuncio->pickPoint->name}}</p>
-                                                                                            <p>En la direccion: {{$anuncio->pickPoint->direccion}}</p>
+                                                                                        <p>{{__('You must deliver it before')}}
+                                                                                            {{$anuncio->reserved_at->addDays(3)->format('d/m/Y')}} {{__('At')}} {{$anuncio->pickPoint->name}}</p>
+                                                                                            <p>{{__('At the address')}}: {{$anuncio->pickPoint->direccion}}</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>

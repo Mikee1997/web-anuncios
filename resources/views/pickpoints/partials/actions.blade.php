@@ -2,6 +2,6 @@
 <form action="{{ route('pickPoints.delete', $pickPoint->id) }}" method="post">
     @csrf
     @method('delete')
-    <input class="btn btn-danger btn-confirm" confirm-text="¿Esta seguro de eliminar {{ $pickPoint->name }}?" 
+    <input class="btn btn-danger btn-confirm" confirm-text="{{__('Are you sure to delete')}} {{ $pickPoint->name }}?"
         type="submit" value="{{ __('Delete') }}" />
 </form>

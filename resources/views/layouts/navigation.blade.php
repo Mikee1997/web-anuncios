@@ -20,14 +20,21 @@
                         {{__('Pick up point') }}
                     </x-nav-link>
                     <x-nav-link :href="route('pickPoints.recogidas')" :active="request()->routeIs('dashboard')">
-                        {{__('Recogidas') }}
+                        {{__('Pickups') }}
                     </x-nav-link>
                     @endif
+
                 </div>
             </div>
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-nav-link align="right" :href="route('changeLanguage', 'es')" :active="App::getLocale()=='es'">
+                    {{__('ES') }}
+                </x-nav-link>
+                <x-nav-link align="right" :href="route('changeLanguage', 'en')" :active="App::getLocale()=='en'">
+                    {{__('EN') }}
+                </x-nav-link>
             @if (auth()->user())
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -62,8 +69,9 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
             @endif
+        </div>
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">

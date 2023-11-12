@@ -113,11 +113,11 @@
                                                                                 <tr>
                                                                                     <td align="left"
                                                                                         class="esd-block-text">
-                                                                                        <p>Ya puedes pasar a recoger tu reserva: {{$anuncio->title}}</p>
+                                                                                        <p>{{__('You can now pick up your reservation')}}: {{$anuncio->title}}</p>
                                                                                         <p><br></p>
-                                                                                        <p>Debes recogerlo antes del
-                                                                                            {{$anuncio->available_at->addDays(3)->format('d/m/Y')}} en {{$anuncio->pickPoint->name}}</p>
-                                                                                            <p>En la direccion: {{$anuncio->pickPoint->direccion}}</p>
+                                                                                        <p>{{__('You must pick it up before')}}
+                                                                                            {{$anuncio->available_at->addDays(3)->format('d/m/Y')}} {{__('at')}} {{$anuncio->pickPoint->name}}</p>
+                                                                                            <p>{{__('At the address')}}: {{$anuncio->pickPoint->direccion}}</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>

@@ -53,9 +53,9 @@ class PickPointController extends Controller
 
 
         if ($updated) {
-            return redirect()->route('pickPoints.edit', $id)->withSuccess(['Punto de recogida modificado correctamente']);
+            return redirect()->route('pickPoints.edit', $id)->withSuccess([__('Pickup point modified successfully')]);
         } else {
-            return redirect()->to(route('pickPoints.edit', $id))->with(['errores' => ['Ocurrió un error al modificar el punto de recogida']]);
+            return redirect()->to(route('pickPoints.edit', $id))->with(['errores' => [__('An error occurred while modifying the pickup point')]]);
 
         }
     }
@@ -70,7 +70,7 @@ class PickPointController extends Controller
         $pickPoint->delete();
 
 
-        return redirect()->route('pickPoints.index')->withSuccess(['Punto de recogida borrado correctamente']);
+        return redirect()->route('pickPoints.index')->withSuccess([__('Pickup point cleared successfully')]);
     }
 
     public function store(RequestPickPoint $request)
@@ -82,9 +82,9 @@ class PickPointController extends Controller
 
 
         if (isset($pickPoint)) {
-            return redirect()->route('pickPoints.edit', $pickPoint->id)->withSuccess(['Punto de recogida creado correctamente']);
+            return redirect()->route('pickPoints.edit', $pickPoint->id)->withSuccess([__('Pickup point created successfully')]);
         } else {
-            return redirect()->to(route('pickPoints.create'))->with(['errores' => ['Ocurrió un error al crear el punto de recogida']]);
+            return redirect()->to(route('pickPoints.create'))->with(['errores' => [__('An error occurred while creating the pickup point')]]);
 
         }
     }
@@ -115,7 +115,7 @@ class PickPointController extends Controller
         $anuncio->save();
         Mail::to($anuncio->buyer->email)->send(new EmailRecieve($anuncio));
 
-        return redirect()->route('pickPoints.recogidas')->withSuccess(['El articulo ha sido recibido']);
+        return redirect()->route('pickPoints.recogidas')->withSuccess([__('The item has been received')]);
     }
 
     public function delive(Request $request, $id)
@@ -128,6 +128,6 @@ class PickPointController extends Controller
         $anuncio->save();
         Mail::to($anuncio->user->email)->send(new EmailDelivered($anuncio));
 
-        return redirect()->route('pickPoints.recogidas')->withSuccess(['El articulo ha sido entregado']);
+        return redirect()->route('pickPoints.recogidas')->withSuccess([__('The item has been delivered')]);
     }
 }

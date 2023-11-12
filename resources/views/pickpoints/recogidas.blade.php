@@ -4,11 +4,11 @@
             <div class="flex sm:items-center">
 
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Recogidas') }}
+                    {{ __('Pickups') }}
                 </h2>
             </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <label for="pickpoint">Selecciona punto de recogida:</label>
+                <label for="pickpoint">{{__('Select pickup point')}}:</label>
                 <form action="{{ route('pickPoints.recogidas') }}" method='GET'>
                     @csrf
                     <select name="pickpoint" id="pickpoint">
@@ -28,9 +28,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="tab">
-                    <button class="tablinks active" onclick="openTab(event, 'reservados')">Reservados</button>
-                    <button class="tablinks" onclick="openTab(event, 'pte-recogida')">Pendiente recogida</button>
-                    <button class="tablinks" onclick="openTab(event, 'delivered')">Historico de entregados</button>
+                    <button class="tablinks active" onclick="openTab(event, 'reservados')">{{__('Reserved')}}</button>
+                    <button class="tablinks" onclick="openTab(event, 'pte-recogida')">{{__('Pending collection')}}</button>
+                    <button class="tablinks" onclick="openTab(event, 'delivered')">{{__('Delivery history')}}</button>
                 </div>
 
                 <div id="reservados" class="tabcontent" style="display: block">
@@ -43,11 +43,11 @@
                                 <thead>
                                     <tr>
                                         <th data-name="id">Id</th>
-                                        <th data-name="title">Titulo</th>
-                                        <th data-name="seller">Vendedor</th>
-                                        <th data-name="buyer">Comprador</th>
-                                        <th data-name="reserved_at">fecha reserva</th>
-                                        <th data-name="actions">Acciones</th>
+                                        <th data-name="title">{{__('Title')}}</th>
+                                        <th data-name="seller">{{__('Seller')}}</th>
+                                        <th data-name="buyer">{{__('Buyer')}}</th>
+                                        <th data-name="reserved_at">{{__('Reservation date')}}</th>
+                                        <th data-name="actions">{{__('Actions')}}</th>
 
                                     </tr>
                                 </thead>
@@ -113,11 +113,11 @@
                                 <thead>
                                     <tr>
                                         <th data-name="id">Id</th>
-                                        <th data-name="title">Titulo</th>
-                                        <th data-name="seller">Vendedor</th>
-                                        <th data-name="buyer">Comprador</th>
-                                        <th data-name="available_at">Disponible desde</th>
-                                        <th data-name="actions">Acciones</th>
+                                        <th data-name="title">{{__('Title')}}</th>
+                                        <th data-name="seller">{{__('Seller')}}</th>
+                                        <th data-name="buyer">{{__('Buyer')}}</th>
+                                        <th data-name="available_at">{{__('Available from')}}</th>
+                                        <th data-name="actions">{{__('Actions')}}</th>
 
                                     </tr>
                                 </thead>
@@ -139,33 +139,6 @@
 
                 <div id="delivered" class="tabcontent">
                     <div class="p-6 text-gray-900">
-                            {{-- <table class="table table-hover">
-                                <tr>
-                                    <th>
-                                        {{ __('Titulo') }}
-                                    </th>
-                                    <th>
-                                        {{ __('vendedor') }}
-                                    </th>
-                                    <th>
-                                        {{ __('comprador') }}
-                                    </th>
-                                </tr>
-                                @foreach ($anunciosEntregados as $anuncio)
-                                    <tr>
-                                        <td>
-                                            {{ $anuncio->title }}
-                                        </td>
-                                        <td>
-                                            {{ $anuncio->user->name }}
-                                        </td>
-                                        <td>
-                                            {{ $anuncio->buyer->name }}
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-                            </table> --}}
                             <table id="delivered-table" cellpadding="0" cellspacing="0" border="0"
                                 class="table table-striped table-bordered dataTable" width="100%"
                                 data-url="{{ route('ad.deliveredDatatable', $selectedPickPoint) }}"
@@ -173,10 +146,10 @@
                                 <thead>
                                     <tr>
                                         <th data-name="id">Id</th>
-                                        <th data-name="title">Titulo</th>
-                                        <th data-name="seller">Vendedor</th>
-                                        <th data-name="buyer">Comprador</th>
-                                        <th data-name="dalivered_at">Fecha de entrega</th>
+                                        <th data-name="title">{{__('Title')}}</th>
+                                        <th data-name="seller">{{__('Seller')}}</th>
+                                        <th data-name="buyer">{{__('Buyer')}}</th>
+                                        <th data-name="dalivered_at">{{__('Date of delivery')}}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -191,7 +164,7 @@
                                 <tbody></tbody>
 
                             </table>
-                      
+
                     </div>
                 </div>
 
@@ -202,50 +175,7 @@
 
 
 
-    {{-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                <div class="p-6 text-gray-900">
-                    {{-- @if ($pickPoints->count() > 0)
-                        <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    {{ __('Name') }}
-                                </th>
-                                <th>
-                                    {{ __('Address') }}
-                                </th>
-                                <th>
-                                    {{ __('created at') }}
-                                </th>
-                                <th>{{ __('Actions') }}</th>
-                            </tr>
-                            @foreach ($pickPoints as $pickPoint)
-                                <tr>
-                                    <td>
-                                        {{$pickPoint->name}}
-                                    </td>
-                                    <td>
-                                        {{$pickPoint->direccion}}
-                                    </td>
-                                    <td>
-                                        {{$pickPoint->created_at}}
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{route('pickPoints.edit',$pickPoint->id)}}">{{__('Edit')}}</a>
-                                        <form action="{{route('pickPoints.delete',$pickPoint->id)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    @else
-                        <a href="{{route('pickPoints.create')}}">{{__('Create your first pick up pont')}}</a>
-                    @endif --}}
     </div>
     </div>
 

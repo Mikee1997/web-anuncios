@@ -71,9 +71,9 @@ class AnunciosController extends Controller
         }
 
         if ($updated) {
-            return redirect()->route('ad.edit', $id)->withSuccess(['Anuncio modificado correctamente']);
+            return redirect()->route('ad.edit', $id)->withSuccess([__('Successfully modified ad')]);
         } else {
-            return redirect()->to(route('ad.edit', $id))->with(['errores' => ['Ocurrió un error al modificar el anuncio']]);
+            return redirect()->to(route('ad.edit', $id))->with(['errores' => [__('An error occurred while modifying the ad')]]);
 
         }
     }
@@ -88,7 +88,7 @@ class AnunciosController extends Controller
         $anuncio->delete();
 
 
-        return redirect()->route('dashboard')->withSuccess(['Anuncio borrado correctamente']);
+        return redirect()->route('dashboard')->withSuccess([__('Ad successfully deleted')]);
     }
 
     public function storeAd(RequestAd $request)
@@ -106,9 +106,9 @@ class AnunciosController extends Controller
 
 
         if (isset($anuncio)) {
-            return redirect()->route('ad.create')->withSuccess(['Anuncio creado correctamente']);
+            return redirect()->route('ad.create')->withSuccess([__('Successfully created ad')]);
         } else {
-            return redirect()->to(route('ad.create'))->with(['errores' => ['Ocurrió un error al crear el anuncio']]);
+            return redirect()->to(route('ad.create'))->with(['errores' => [__('An error occurred while creating the ad')]]);
 
         }
     }
@@ -236,6 +236,11 @@ class AnunciosController extends Controller
                 $query->whereHas('user', function ($query) use ($keyword) {
                     $query->where('name', 'like', "%$keyword%");
                 });
+            })
+            ->addColumn('actions',function($anuncio){
+                return view('pickpoints.partials.buttonEntregar', [
+                    'anuncio' => $anuncio,
+                ]);
             })
             ->make(true);
     }

@@ -18,6 +18,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    <script>
+        var dataTableLang = {!! json_encode(trans('datatables')) !!};
+    </script>
     <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
 
     @vite(['resources/js/app.js'])
@@ -80,11 +83,11 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h4 class="modal-title" id="myModalLabel">¿Esta seguro de eliminar?</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{__('Are you sure to delete?')}}</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
-                    <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                    <button type="button" class="btn btn-default" id="modal-btn-si">{{__('Yes')}}</button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-no">{{__('No')}}</button>
                 </div>
             </div>
         </div>
@@ -92,6 +95,7 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
+
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.25/datatables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 

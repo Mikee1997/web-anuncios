@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnunciosController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PickPointController;
 use App\Http\Controllers\ProfileController;
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AnunciosController::class, 'mostrarAnuncios'])->name('index');
 Route::get('/detalle/{idAnuncio}', [AnunciosController::class, 'detailAd'])->name('detailAd');
-
+Route::get('change-language/{locale}', [Controller::class, 'changeLanguage'])
+    ->name('changeLanguage');
 
 
 

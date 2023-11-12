@@ -117,7 +117,7 @@ $(document).ready(function(e) {
                 orders.push([orderTable[i], orderType[i]]);
             });
         }
-
+        console.log(dataTableLang);
         table.DataTable({
             "responsive": true,
             "processing": true,
@@ -129,31 +129,31 @@ $(document).ready(function(e) {
             "lengthMenu": [[100, 500, -1], [100, 500, "Todos"]],
             "searchDelay": 350,
             "language": {
-                "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron resultados",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
-                "sUrl":            "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
+                "sProcessing":    dataTableLang.sProcessing,
+                "sLengthMenu":     dataTableLang.sLengthMenu,
+                "sZeroRecords":    dataTableLang.sZeroRecords,
+                "sEmptyTable":     dataTableLang.sEmptyTable,
+                "sInfo":           dataTableLang.sInfo,
+                "sInfoEmpty":      dataTableLang.sInfoEmpty,
+                "sInfoFiltered":   dataTableLang.sInfoFiltered,
+                "sInfoPostFix":    dataTableLang.sInfoPostFix,
+                "sSearch":         dataTableLang.sSearch,
+                "sUrl":            dataTableLang.sUrl,
+                "sInfoThousands":  dataTableLang.sInfoThousands,
+                "sLoadingRecords": dataTableLang.sLoadingRecords,
                 "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
-                    "sPrevious": "Anterior"
+                    "sFirst":    dataTableLang.sFirst,
+                    "sLast":     dataTableLang.sLast,
+                    "sNext":     dataTableLang.sNext,
+                    "sPrevious": dataTableLang.sPrevious
                 },
                 "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    "sSortAscending":  dataTableLang.sSortAscending,
+                    "sSortDescending": dataTableLang.sSortDescending
                 },
                 "buttons": {
-                    "copy": "Copiar",
-                    "colvis": "Visibilidad"
+                    "copy": dataTableLang.copy,
+                    "colvis": dataTableLang.colvis
                 }
             },
             'searchCols': searchColumns,

@@ -46,12 +46,12 @@
                                                                                     <td align="center"
                                                                                         class="esd-block-image"
                                                                                         style="font-size:0"><a
-                                                                                            target="_blank" href="{{route('index')}}"><img
+                                                                                            target="_blank"
+                                                                                            href="{{ route('index') }}"><img
                                                                                                 class="adapt-img esdev-empty-img"
-                                                                                                src="{{asset('images/logo.png')}}"
+                                                                                                src="{{ asset('images/logo.png') }}"
                                                                                                 alt width="100%"
-                                                                                                height="100"
-                                                                                                ></a>
+                                                                                                height="100"></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -75,7 +75,8 @@
                                                                                         <p
                                                                                             style="font-family: 'source sans pro', 'helvetica neue', helvetica, arial, sans-serif; font-size: 44px; color: #0000ff;">
                                                                                             <strong>VeciMarket</strong><br
-                                                                                                type="_moz"></p>
+                                                                                                type="_moz">
+                                                                                        </p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -113,11 +114,17 @@
                                                                                 <tr>
                                                                                     <td align="left"
                                                                                         class="esd-block-text">
-                                                                                        <p>Tu anuncio ya ha sido entregado: {{$anuncio->title}}</p>
+                                                                                        <p>{{ __('Your ad has already been delivered') }}:
+                                                                                            {{ $anuncio->title }}</p>
                                                                                         <p><br></p>
-                                                                                        <p>Puedes pasar a recoger tu dinero a
-                                                                                            {{$anuncio->dalivered_at->addDays(3)->format('d/m/Y')}} en {{$anuncio->pickPoint->name}}</p>
-                                                                                            <p>En la direccion: {{$anuncio->pickPoint->direccion}}</p>
+                                                                                        <p>{{ __('You can pick up your money at') }}
+                                                                                            {{ $anuncio->dalivered_at->addDays(3)->format('d/m/Y') }}
+                                                                                            {{ __('at') }}
+                                                                                            {{ $anuncio->pickPoint->name }}
+                                                                                        </p>
+                                                                                        <p>{{ __('At the address') }}:
+                                                                                            {{ $anuncio->pickPoint->direccion }}
+                                                                                        </p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>

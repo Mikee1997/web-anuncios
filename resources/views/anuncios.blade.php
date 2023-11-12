@@ -4,7 +4,7 @@
 
     <div class="content">
         <div class="row d-flex justify-content-center">
-            <h1 class="text-center">Listado de Anuncios
+            <h1 class="text-center">{{__('Ad List')}}
             </h1>
         </div>
         <div class="row d-flex justify-content-center">
@@ -15,7 +15,7 @@
                             <img src="{{ $anuncio->imagen }}" alt="Imagen">
                         @endif
                         <h2 class="text-light">{{ $anuncio->title }}</h2>
-                        <p class="text-body-secondary">{{ $anuncio->short_description }}</p>
+                        <p class="text-white">{{ $anuncio->short_description }}</p>
                     </a>
 
                 </div>

@@ -10,37 +10,51 @@
             @if (isset($anuncio))
                 @method('PATCH')
             @endif
-            <label for="title">Titulo:</label>
+            <label for="title">{{ __('Title') }}:</label>
             <input required type="text" id="title" name="title" value="{{ $anuncio->title ?? '' }}" />
-            <label for="short_description">Descripción corta:</label>
+            <label for="short_description">{{ __('Short description') }}:</label>
             <input required type="text" id="short_description" name="short_description"
                 value="{{ $anuncio->short_description ?? '' }}" />
-            <label for="long_description">Descripción larga:</label>
+            <label for="long_description">{{ __('Large description') }}:</label>
             <textarea required id="long_description" name="long_description" value="{{ $anuncio->long_description ?? '' }}">{{ $anuncio->long_description ?? '' }}</textarea>
-            <label for="phone">Teléfono:</label>
+            <label for="phone">{{ __('Phone') }}:</label>
             <input required type="tel" id="phone" name="phone" value="{{ $anuncio->phone ?? '' }}" />
             <label for="email">Email:</label>
             <input required type="email" id="email" name="email" value="{{ $anuncio->email ?? '' }}" />
             @if (isset($anuncio) && $anuncio->hasMedia('imagenes'))
                 @foreach ($anuncio->getMedia('imagenes') as $imagen)
-                    <img id="image_preview" src="{{ $imagen->getUrl() }}" alt="Imagen">
-                    <label for="image">{{ __('Modificar imagen') }}:</label>
-                    <input id="image-input" name="image" type="file" accept="image/png, image/jpeg" />
+                    <img id="image_preview" src="{{ $imagen->getUrl() }}" alt="{{ __('Image') }}">
+                    <label for="image">{{ __('Edit image') }}:</label>
+                    <label class="btn btn-primary" for="image-input" id="custom-file-label">
+                        {{ __('Select file') }}
+                    </label>
+                    <input id="image-input" name="image" type="file" accept="image/png, image/jpeg"
+                        style="display: none;" onchange="updateFileName()" />
+
+                    <div id="file-name"></div>
                 @endforeach
             @else
                 <img id="image_preview" style="display: none" src="#" alt="Imagen">
-                <label for="image">{{ __('Subir imagen') }}:</label>
-                <input id="image-input" name="image" type="file" accept="image/png, image/jpeg" />
+                <label for="image">{{ __('Upload image') }}:</label>
+                <label class="btn btn-primary" for="image-input" id="custom-file-label">
+                    {{ __('Select file') }}
+                </label>
+                <input id="image-input" name="image" type="file" accept="image/png, image/jpeg" style="display: none;"
+                    onchange="updateFileName()" />
+
+                <div id="file-name"></div>
             @endif
             <div id="div-delete" class="{{ isset($anuncio) && $anuncio->hasMedia('imagenes') ? '' : 'd-none' }}">
                 <input id="delete_image" name="delete_image" type="checkbox">
-                <label for="delete_image">{{ __('borrar imagen') }}:</label>
+                <label for="delete_image">{{ __('delete image') }}:</label>
             </div>
-            <h3>Puntos de recogida:</h3>
-            @foreach ($pickPoints as $key=>$pickPoint)
+            <h3>{{ __('Pick up point') }}:</h3>
+            @foreach ($pickPoints as $key => $pickPoint)
                 <div>
-                    <input name="pickpoint[{{ $pickPoint->id }}]" type="checkbox" {{isset($anuncio)&&in_array($pickPoint->id,json_decode($anuncio->pick_points),true)?'checked':''}}>
-                    <label for="pickpoint[{{ $pickPoint->id }}]">{{ $pickPoint->name }} ({{ $pickPoint->direccion }})</label>
+                    <input name="pickpoint[{{ $pickPoint->id }}]" type="checkbox"
+                        {{ isset($anuncio) && in_array($pickPoint->id, json_decode($anuncio->pick_points), true) ? 'checked' : '' }}>
+                    <label for="pickpoint[{{ $pickPoint->id }}]">{{ $pickPoint->name }}
+                        ({{ $pickPoint->direccion }})</label>
                 </div>
             @endforeach
             <input class="btn btn-primary" type="submit"
@@ -49,6 +63,7 @@
 
         </form>
     </div>
+
 @endsection
 
 @push('js')
@@ -90,5 +105,19 @@
                 }
             })
         })
+    </script>
+    <script>
+        function updateFileName() {
+            const input = document.getElementById('image-input');
+            const fileName = document.getElementById('file-name');
+            const customFileLabel = document.getElementById('custom-file-label');
+
+            if (input.files.length > 0) {
+                const name = input.files[0].name;
+                fileName.textContent = '{{__('Selected file')}}: ' + name;
+            } else {
+                fileName.textContent = '';
+            }
+        }
     </script>
 @endpush

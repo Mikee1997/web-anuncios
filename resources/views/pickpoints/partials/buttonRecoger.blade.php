@@ -2,6 +2,6 @@
     method="post">
     @csrf
     <input class="btn btn-primary btn-confirm"
-        confirm-text="¿Esta seguro de recepcionar {{ $anuncio->title }}?"
-         type="submit" value="{{ __('Recibir') }}" />
+        confirm-text="{{__('Are you sure you are receiving')}} {{ $anuncio->title }}?"
+         type="submit" value="{{ __('Receive') }}" />
 </form>

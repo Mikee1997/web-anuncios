@@ -12,41 +12,6 @@
                     {{ __('Pick up point') }} <a class="btn btn-primary" href="{{route('pickPoints.create')}}">{{__('Create pick up point')}}</a>
                 </div>
                 <div class="p-6 text-gray-900">
-                        {{-- <table class="table table-hover">
-                            <tr>
-                                <th>
-                                    {{ __('Name') }}
-                                </th>
-                                <th>
-                                    {{ __('Address') }}
-                                </th>
-                                <th>
-                                    {{ __('created at') }}
-                                </th>
-                                <th>{{ __('Actions') }}</th>
-                            </tr>
-                            @foreach ($pickPoints as $pickPoint )
-                                <tr>
-                                    <td>
-                                        {{$pickPoint->name}}
-                                    </td>
-                                    <td>
-                                        {{$pickPoint->direccion}}
-                                    </td>
-                                    <td>
-                                        {{$pickPoint->created_at}}
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{route('pickPoints.edit',$pickPoint->id)}}">{{__('Edit')}}</a>
-                                        <form action="{{route('pickPoints.delete',$pickPoint->id)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <input class="btn btn-danger btn-confirm" confirm-text="¿Esta seguro de eliminar {{$pickPoint->name}}?" disabled type="submit" value="{{__('Delete')}}"/>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table> --}}
                         <table id="pickpoints-table" cellpadding="0" cellspacing="0" border="0"
                                 class="table table-striped table-bordered dataTable" width="100%"
                                 data-url="{{ route('pickPoints.datatable') }}"
