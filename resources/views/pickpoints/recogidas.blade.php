@@ -9,11 +9,13 @@
             </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <label for="pickpoint">Selecciona punto de recogida:</label>
-                <form action="{{route('pickPoints.recogidas')}}" method='GET'>
+                <form action="{{ route('pickPoints.recogidas') }}" method='GET'>
                     @csrf
                     <select name="pickpoint" id="pickpoint">
-                        @foreach ($pickPoints as $pickpoint )
-                            <option {{$selectedPickPoint==$pickpoint->id?'selected':''}} value="{{$pickpoint->id}}">{{$pickpoint->name}}</option>
+                        @foreach ($pickPoints as $pickpoint)
+                            <option {{ $selectedPickPoint == $pickpoint->id ? 'selected' : '' }}
+                                value="{{ $pickpoint->id }}">
+                                {{ $pickpoint->name }}</option>
                         @endforeach
                     </select>
                 </form>
@@ -33,54 +35,41 @@
 
                 <div id="reservados" class="tabcontent" style="display: block">
                     <div class="p-6 text-gray-900">
-                        @if ($anunciosReservados->count() > 0)
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>
-                                        {{ __('Titulo') }}
-                                    </th>
-                                    <th>
-                                        {{ __('vendedor') }}
-                                    </th>
-                                    <th>
-                                        {{ __('comprador') }}
-                                    </th>
-                                    <th>{{ __('Actions') }}</th>
-                                </tr>
-                                @foreach ($anunciosReservados as $anuncio)
-                                    <tr>
-                                        <td>
-                                            {{ $anuncio->title }}
-                                        </td>
-                                        <td>
-                                            {{ $anuncio->user->name }}
-                                        </td>
-                                        <td>
-                                            {{ $anuncio->buyer->name }}
-                                        </td>
-                                        <td>
 
-                                            <form action="{{ route('pickPoints.recieve', $anuncio->id) }}"
-                                                method="post">
-                                                @csrf
-                                                <input class="btn btn-primary btn-confirm"
-                                                    confirm-text="¿Esta seguro de recepcionar {{ $anuncio->title }}?"
-                                                    disabled type="submit" value="{{ __('Recibir') }}" />
-                                            </form>
-                                        </td>
+                            <table id="reserved-table" cellpadding="0" cellspacing="0" border="0"
+                                class="table table-striped table-bordered dataTable" width="100%"
+                                data-url="{{ route('ad.reservedDatatable', $selectedPickPoint) }}"
+                                data-order-column="0" data-order-type="desc">
+                                <thead>
+                                    <tr>
+                                        <th data-name="id">Id</th>
+                                        <th data-name="title">Titulo</th>
+                                        <th data-name="seller">Vendedor</th>
+                                        <th data-name="buyer">Comprador</th>
+                                        <th data-name="reserved_at">fecha reserva</th>
+                                        <th data-name="actions">Acciones</th>
+
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th data-name="id"></th>
+                                        <th data-name="title"></th>
+                                        <th data-name="seller"></th>
+                                        <th data-name="buyer"></th>
+                                        <th data-name="actions"></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+
                             </table>
-                        @else
-                            <p>{{ __('No hay anuncios pendientes de recogida') }}</p>
-                        @endif
+
                     </div>
                 </div>
 
                 <div id="pte-recogida" class="tabcontent">
                     <div class="p-6 text-gray-900">
-                        @if ($anunciosPteRecogida->count() > 0)
-                            <table class="table table-hover">
+                            {{-- <table class="table table-hover">
                                 <tr>
                                     <th>
                                         {{ __('Titulo') }}
@@ -116,17 +105,41 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            </table> --}}
+                            <table id="pte-recogida-table" cellpadding="0" cellspacing="0" border="0"
+                                class="table table-striped table-bordered dataTable" width="100%"
+                                data-url="{{ route('ad.pteDatatable', $selectedPickPoint) }}"
+                                data-order-column="0" data-order-type="desc">
+                                <thead>
+                                    <tr>
+                                        <th data-name="id">Id</th>
+                                        <th data-name="title">Titulo</th>
+                                        <th data-name="seller">Vendedor</th>
+                                        <th data-name="buyer">Comprador</th>
+                                        <th data-name="available_at">Disponible desde</th>
+                                        <th data-name="actions">Acciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th data-name="id"></th>
+                                        <th data-name="title"></th>
+                                        <th data-name="seller"></th>
+                                        <th data-name="buyer"></th>
+                                        <th data-name="actions"></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+
                             </table>
-                        @else
-                            <p>{{ __('No hay anuncios pendientes de entrega') }}</p>
-                        @endif
+
                     </div>
                 </div>
 
                 <div id="delivered" class="tabcontent">
                     <div class="p-6 text-gray-900">
-                        @if ($anunciosEntregados->count() > 0)
-                            <table class="table table-hover">
+                            {{-- <table class="table table-hover">
                                 <tr>
                                     <th>
                                         {{ __('Titulo') }}
@@ -152,10 +165,33 @@
 
                                     </tr>
                                 @endforeach
+                            </table> --}}
+                            <table id="delivered-table" cellpadding="0" cellspacing="0" border="0"
+                                class="table table-striped table-bordered dataTable" width="100%"
+                                data-url="{{ route('ad.deliveredDatatable', $selectedPickPoint) }}"
+                                data-order-column="0" data-order-type="desc">
+                                <thead>
+                                    <tr>
+                                        <th data-name="id">Id</th>
+                                        <th data-name="title">Titulo</th>
+                                        <th data-name="seller">Vendedor</th>
+                                        <th data-name="buyer">Comprador</th>
+                                        <th data-name="dalivered_at">Fecha de entrega</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th data-name="id"></th>
+                                        <th data-name="title"></th>
+                                        <th data-name="seller"></th>
+                                        <th data-name="buyer"></th>
+                                        <th data-name="dalivered_at"></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+
                             </table>
-                        @else
-                            <p>{{ __('No hay anuncios entregados') }}</p>
-                        @endif
+                      
                     </div>
                 </div>
 
@@ -215,7 +251,7 @@
 
     </div>
 
-    </div> --}}
+    </div>
 
     @push('js')
         <script>
@@ -239,7 +275,30 @@
                 document.getElementById(name).style.display = "block";
                 evt.currentTarget.className += " active";
             }
+
+            $(document).ready(function() {
+                // // Obtén la instancia de la tabla DataTables existente
+                // var tabla = $('#delivered-table').DataTable();
+
+                // // Establece el nuevo ancho para la segunda columna (índice 1)
+                // tabla.column(1).width('10px').draw();
+
+            });
         </script>
+    @endpush
+
+    @push('css')
+        <style>
+            #delivered-table tbody tr td:nth-child(1) {
+                width: 40px;
+                /* Ajusta el ancho de la primera columna */
+            }
+
+            #delivered-table tbody tr td:nth-child(2) {
+                width: 100px;
+                /* Ajusta el ancho de la segunda columna */
+            }
+        </style>
     @endpush
 
 </x-app-layout>

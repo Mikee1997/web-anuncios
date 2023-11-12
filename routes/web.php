@@ -39,6 +39,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/anuncio/{id}', [AnunciosController::class, 'destroy'])->name('delete');
         Route::get('/reservar-anuncio/{id}', [AnunciosController::class, 'reserve'])->name('reserve');
         Route::post('/reservar-anuncio/{id}', [AnunciosController::class, 'reserveSave'])->name('reserveSave');
+        Route::get('/delivered-datatable/{pickpoint}', [AnunciosController::class, 'deliveredDatatable'])->name('deliveredDatatable')->middleware('admin');
+        Route::get('/reserved-datatable/{pickpoint}', [AnunciosController::class, 'reservedDatatable'])->name('reservedDatatable')->middleware('admin');
+        Route::get('/pte-datatable/{pickpoint}', [AnunciosController::class, 'pteDatatable'])->name('pteDatatable')->middleware('admin');
+        Route::get('/myAdsDatatable', [AnunciosController::class, 'myAdsDatatable'])->name('myAdsDatatable');
 
 
     });
@@ -55,6 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::get('recogidas', [PickPointController::class, 'recogidas'])->name('recogidas')->middleware('admin');
         Route::post('/recibir/{id}', [PickPointController::class, 'recieve'])->name('recieve')->middleware('admin');
         Route::post('/entregar/{id}', [PickPointController::class, 'delive'])->name('delive')->middleware('admin');
+        Route::get('/datatable', [PickPointController::class, 'datatable'])->name('datatable')->middleware('admin');
 
 
 
@@ -62,3 +67,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

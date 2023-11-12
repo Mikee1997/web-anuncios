@@ -10,13 +10,29 @@ use App\Models\PickPoint;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\Facades\DataTables;
 
 class PickPointController extends Controller
 {
     public function index()
     {
-        $pickPoints = PickPoint::all();
-        return view("pickpoints.index", compact("pickPoints"));
+        return view("pickpoints.index");
+    }
+
+    public function datatable() {
+        $query = PickPoint::query();
+
+        return DataTables::eloquent($query)
+            ->addColumn('actions',function($pickPoint){
+                return view('pickpoints.partials.actions', [
+                    'pickPoint' => $pickPoint,
+                ]);
+            })
+            ->editColumn('created_at',function($pickpoint){
+
+                return $pickpoint->created_at->format('Y-m-d h:i:s');
+            })
+            ->make(true);
     }
 
     public function create()
@@ -81,14 +97,13 @@ class PickPointController extends Controller
         }else{
             $pickpoint=$pickPoints->first()->id;
         }
-        $anunciosReservados = Anuncio::where('state', 'reserved')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
-        $anunciosPteRecogida = Anuncio::where('state', 'pte-recogida')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
-        $anunciosEntregados = Anuncio::where('state', 'delivered')->where('pickpoint_selected',$pickpoint)->withTrashed()->get();
 
 
 
-        return view('pickpoints.recogidas', compact('anunciosReservados', 'anunciosPteRecogida','anunciosEntregados','pickPoints')+['selectedPickPoint'=>$pickpoint]);
+        return view('pickpoints.recogidas', compact('pickPoints')+['selectedPickPoint'=>$pickpoint]);
     }
+
+
 
     public function recieve(Request $request, $id)
     {

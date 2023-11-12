@@ -13,8 +13,7 @@
                         href="{{ route('ad.create') }}">{{ __('Create ad') }}</a>
                 </div>
                 <div class="p-6 text-gray-900">
-                    @if ($anuncios->count() > 0)
-                        <table class="table table-hover">
+                        {{-- <table class="table table-hover">
                             <tr>
                                 <th>
                                     {{ __('Title') }}
@@ -55,10 +54,39 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </table>
-                    @else
-                        <a href="{{ route('ad.create') }}">{{ __('Create your first ad') }}</a>
-                    @endif
+                        </table> --}}
+                        <table id="ad-table" cellpadding="0" cellspacing="0" border="0"
+                        class="table table-striped table-bordered dataTable" width="100%"
+                        data-url="{{ route('ad.myAdsDatatable') }}"
+                        data-order-column="0" data-order-type="desc">
+                        <thead>
+                            <tr>
+
+                                <th data-name="title">
+                                    {{ __('Title') }}
+                                </th>
+                                <th data-name="created_at">
+                                    {{ __('created at') }}
+                                </th>
+                                <th data-name="updated_at">
+                                    {{ __('updated at') }}
+                                </th>
+                                <th data-name="state">{{ __('Estado') }}</th>
+                                <th data-name="actions">{{ __('Actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th data-name="title"></th>
+                                <th data-name="created_at"></th>
+                                <th data-name="updated_at"></th>
+                                <th data-name="state"></th>
+                                <th data-name="actions"></th>
+                            </tr>
+                        </tfoot>
+                        <tbody></tbody>
+
+                    </table>
                 </div>
             </div>
 

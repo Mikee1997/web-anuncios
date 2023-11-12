@@ -12,8 +12,7 @@
                     {{ __('Pick up point') }} <a class="btn btn-primary" href="{{route('pickPoints.create')}}">{{__('Create pick up point')}}</a>
                 </div>
                 <div class="p-6 text-gray-900">
-                    @if ($pickPoints->count() > 0)
-                        <table class="table table-hover">
+                        {{-- <table class="table table-hover">
                             <tr>
                                 <th>
                                     {{ __('Name') }}
@@ -47,10 +46,36 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </table>
-                    @else
-                        <a href="{{route('pickPoints.create')}}">{{__('Create your first pick up pont')}}</a>
-                    @endif
+                        </table> --}}
+                        <table id="pickpoints-table" cellpadding="0" cellspacing="0" border="0"
+                                class="table table-striped table-bordered dataTable" width="100%"
+                                data-url="{{ route('pickPoints.datatable') }}"
+                                data-order-column="0" data-order-type="desc">
+                                <thead>
+                                    <tr>
+                                        <th data-name="name">
+                                            {{ __('Name') }}
+                                        </th>
+                                        <th data-name="direccion">
+                                            {{ __('Address') }}
+                                        </th>
+                                        <th data-name="created_at">
+                                            {{ __('created at') }}
+                                        </th>
+                                        <th data-name="actions">{{ __('Actions') }}</th>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th data-name="name"></th>
+                                        <th data-name="direccion"></th>
+                                        <th data-name="created_at"></th>
+                                        <th data-name="actions"></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody></tbody>
+
+                            </table>
+
                 </div>
             </div>
 
