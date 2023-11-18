@@ -116,7 +116,7 @@
                                                                                         <p>{{__('Your ad')}} {{$anuncio->title}} {{__('has been reserved')}}.</p>
                                                                                         <p><br></p>
                                                                                         <p>{{__('You must deliver it before')}}
-                                                                                            {{$anuncio->reserved_at->addDays(3)->format('d/m/Y')}} {{__('At')}} {{$anuncio->pickPoint->name}}</p>
+                                                                                            {{$anuncio->reserved_at->addDays(3)->format('d/m/Y')}} {{__('at')}} {{$anuncio->pickPoint->name}}</p>
                                                                                             <p>{{__('At the address')}}: {{$anuncio->pickPoint->direccion}}</p>
                                                                                     </td>
                                                                                 </tr>
