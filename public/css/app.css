@@ -2,6 +2,10 @@ form{
     display: inline-grid;
 }
 
+.anuncio{
+    padding: calc(var(--bs-gutter-x) * .5);
+}
+
 .anuncio img
 {
     max-width: 100%;

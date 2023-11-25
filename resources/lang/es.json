@@ -109,7 +109,8 @@
     "An error occurred while modifying the pickup point":"Ocurrió un error al modificar el punto de recogida",
     "An error occurred while creating the pickup point":"Ocurrió un error al crear el punto de recogida",
     "Available from":"Disponible desde",
-    "Select pickup point":"Selecciona punto de recogida"
+    "Select pickup point":"Selecciona punto de recogida",
+    "Edit pick up point":"Editar punto de recogida"
 }
 
 

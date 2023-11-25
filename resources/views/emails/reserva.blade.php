@@ -18,7 +18,6 @@
 
 <body>
     <div dir="ltr" class="es-wrapper-color">
-
         <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
@@ -32,7 +31,6 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="es-p20t es-p20r es-p20l esd-structure" align="left">
-
                                                         <table class="es-left" cellspacing="0" cellpadding="0"
                                                             align="left">
                                                             <tbody>

@@ -1,26 +1,28 @@
 <x-app-layout>
+    <!-- Encabezado personalizado de la página -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
+    <!-- Contenido principal de la página -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <!-- Sección de anuncios del usuario -->
                 <div class="p-6 text-gray-900">
                     {{ __('Your ads') }} <a class="btn btn-primary"
                         href="{{ route('ad.create') }}">{{ __('Create ad') }}</a>
                 </div>
-                <div class="p-6 text-gray-900">
 
-                        <table id="ad-table" cellpadding="0" cellspacing="0" border="0"
+                <!-- Tabla de anuncios del usuario mostrados usando datatable-->
+                <div class="p-6 text-gray-900">
+                    <table id="ad-table" cellpadding="0" cellspacing="0" border="0"
                         class="table table-striped table-bordered dataTable" width="100%"
-                        data-url="{{ route('ad.myAdsDatatable') }}"
-                        data-order-column="0" data-order-type="desc">
+                        data-url="{{ route('ad.myAdsDatatable') }}" data-order-column="0" data-order-type="desc">
                         <thead>
                             <tr>
-
                                 <th data-name="title">
                                     {{ __('Title') }}
                                 </th>
@@ -44,17 +46,9 @@
                             </tr>
                         </tfoot>
                         <tbody></tbody>
-
                     </table>
                 </div>
             </div>
-
         </div>
-
     </div>
-
-
-
-
-
 </x-app-layout>

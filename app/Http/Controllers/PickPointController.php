@@ -14,38 +14,44 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PickPointController extends Controller
 {
+    // Muestra la vista principal de los puntos de recogida
     public function index()
     {
         return view("pickpoints.index");
     }
 
-    public function datatable() {
+    // Obtiene datos para datatable de todos los puntos de recogida
+    public function datatable()
+    {
         $query = PickPoint::query();
 
         return DataTables::eloquent($query)
-            ->addColumn('actions',function($pickPoint){
+            ->addColumn('actions', function ($pickPoint) {
                 return view('pickpoints.partials.actions', [
                     'pickPoint' => $pickPoint,
                 ]);
             })
-            ->editColumn('created_at',function($pickpoint){
+            ->editColumn('created_at', function ($pickpoint) {
 
                 return $pickpoint->created_at->format('Y-m-d h:i:s');
             })
             ->make(true);
     }
 
+    // Muestra el formulario para crear un nuevo punto de recogida
     public function create()
     {
         return view('pickpoints.formulario_pick_point');
     }
 
+    // Muestra el formulario para editar un punto de recogida existente
     public function edit($id)
     {
         $pickPoint = PickPoint::find($id);
         return view('pickpoints.formulario_pick_point', compact('pickPoint'));
     }
 
+    // Actualiza un punto de recogida existente
     public function update(RequestPickPoint $request, $id)
     {
         $object = PickPoint::find($id);
@@ -60,6 +66,7 @@ class PickPointController extends Controller
         }
     }
 
+    // Elimina un punto de recogida
     public function destroy(Request $request, $id)
     {
         // $request->validateWithBag('userDeletion', [
@@ -73,14 +80,10 @@ class PickPointController extends Controller
         return redirect()->route('pickPoints.index')->withSuccess([__('Pickup point cleared successfully')]);
     }
 
+    // Almacena un nuevo punto de recogida
     public function store(RequestPickPoint $request)
     {
-
         $pickPoint = PickPoint::create($request->only('name', 'direccion'));
-
-
-
-
         if (isset($pickPoint)) {
             return redirect()->route('pickPoints.edit', $pickPoint->id)->withSuccess([__('Pickup point created successfully')]);
         } else {
@@ -89,22 +92,19 @@ class PickPointController extends Controller
         }
     }
 
+    // Muestra la vista de recogidas en todos los puntos de recogida
     public function recogidas(Request $request)
     {
         $pickPoints = PickPoint::all();
-        if($request->has('pickpoint')){
-            $pickpoint=$request->pickpoint;
-        }else{
-            $pickpoint=$pickPoints->first()->id;
+        if ($request->has('pickpoint')) {
+            $pickpoint = $request->pickpoint;
+        } else {
+            $pickpoint = $pickPoints->first()->id;
         }
-
-
-
-        return view('pickpoints.recogidas', compact('pickPoints')+['selectedPickPoint'=>$pickpoint]);
+        return view('pickpoints.recogidas', compact('pickPoints') + ['selectedPickPoint' => $pickpoint]);
     }
 
-
-
+    // Marca un anuncio como "recibido" y envía correo electrónico al comprador
     public function recieve(Request $request, $id)
     {
         $anuncio = Anuncio::find($id);
@@ -114,10 +114,10 @@ class PickPointController extends Controller
         $anuncio->available_at = Carbon::now();
         $anuncio->save();
         Mail::to($anuncio->buyer->email)->send(new EmailRecieve($anuncio));
-
         return redirect()->route('pickPoints.recogidas')->withSuccess([__('The item has been received')]);
     }
 
+    // Marca un anuncio como "entregado" y envía correo electrónico al vendedor
     public function delive(Request $request, $id)
     {
         $anuncio = Anuncio::find($id);

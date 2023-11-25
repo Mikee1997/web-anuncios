@@ -21,13 +21,14 @@ class RequestAd extends FormRequest
      */
     public function rules(): array
     {
+        // Define las reglas de validación para los campos del formulario
         return [
-            'title'=>'required',
-            'short_description'=>'required',
-            'long_description'=>'required',
-            'phone'=>'required',
-            'email'=>'required',
-            'pickpoint'=>'required',
+            'title' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'pickpoint' => 'required',
         ];
     }
 }
