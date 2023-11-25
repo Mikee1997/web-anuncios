@@ -15,7 +15,7 @@
     <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
 
     <!-- Compilación y enlace del archivo JavaScript utilizando Vite -->
-    @vite(['resources/js/app.js'])
+    {{-- @vite(['resources/js/app.js']) --}}
 </head>
 
 <body>
