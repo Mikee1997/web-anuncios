@@ -27,7 +27,7 @@
     <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
 
     <!-- Integración con Vite para el desarrollo de JavaScript -->
-    @vite(['resources/js/app.js'])
+    {{-- @vite(['resources/js/app.js']) --}}
 </head>
 
 <body class="font-sans antialiased">
