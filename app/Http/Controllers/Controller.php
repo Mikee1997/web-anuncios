@@ -22,6 +22,6 @@ class Controller extends BaseController
         }
 
         // Redirige de nuevo a la página anterior
-        return redirect()->route('dashboard');//->back();
+        return redirect()->back();//->back();
     }
 }

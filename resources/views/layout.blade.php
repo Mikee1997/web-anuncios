@@ -16,6 +16,8 @@
 
     <!-- Compilación y enlace del archivo JavaScript utilizando Vite -->
     {{-- @vite(['resources/js/app.js']) --}}
+    <link rel="modulepreload" href="{{asset('js/app2.js')}}">
+    <script type="module" src="{{asset('js/app2.js')}}"></script>
 </head>
 
 <body>

@@ -28,6 +28,8 @@
 
     <!-- Integración con Vite para el desarrollo de JavaScript -->
     {{-- @vite(['resources/js/app.js']) --}}
+    <link rel="modulepreload" href="{{asset('js/app2.js')}}">
+    <script type="module" src="{{asset('js/app2.js')}}"></script>
 </head>
 
 <body class="font-sans antialiased">
