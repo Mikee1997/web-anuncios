@@ -49,7 +49,7 @@
                                                                                             target="_blank"
                                                                                             href="{{ route('index') }}"><img
                                                                                                 class="adapt-img esdev-empty-img"
-                                                                                                src="{{ asset('images/logo.png') }}"
+                                                                                                src="{{ 'data:image/' . pathinfo(public_path('images/logo.png'), PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents(public_path('images/logo.png'))) }}"
                                                                                                 alt width="100%"
                                                                                                 height="100"></a>
                                                                                     </td>
