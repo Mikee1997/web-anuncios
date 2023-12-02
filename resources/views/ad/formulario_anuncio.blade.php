@@ -20,6 +20,9 @@
                 value="{{ $anuncio->short_description ?? '' }}" />
             <label for="long_description">{{ __('Large description') }}:</label>
             <textarea required id="long_description" name="long_description" value="{{ $anuncio->long_description ?? '' }}">{{ $anuncio->long_description ?? '' }}</textarea>
+            <label for="price">{{ __('Price') }}:</label>
+            <input required type="number" step="0.01" id="price" name="price"
+                value="{{ $anuncio->price ?? '' }}" />
             <label for="phone">{{ __('Phone') }}:</label>
             <input required type="tel" id="phone" name="phone" value="{{ $anuncio->phone ?? '' }}" />
             <label for="email">Email:</label>

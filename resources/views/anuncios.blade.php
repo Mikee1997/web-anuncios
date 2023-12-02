@@ -19,6 +19,7 @@
                         <h2 class="text-light">{{ $anuncio->title }}</h2>
                         <!-- Descripción corta del anuncio en texto blanco -->
                         <p class="text-white">{{ $anuncio->short_description }}</p>
+                        <p class="text-white price"><strong>{{ $anuncio->price }}€</strong></p>
                     </a>
                 </div>
             @endforeach

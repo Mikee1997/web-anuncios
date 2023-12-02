@@ -1750,3 +1750,9 @@ select {
     border-bottom-right-radius: 1px;
     border-top-right-radius: 1px;
   }
+
+
+  .price
+{
+    font-size: 2em;
+}

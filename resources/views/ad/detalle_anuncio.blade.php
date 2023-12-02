@@ -9,6 +9,8 @@
         <h3>{{ $anuncio->short_description }}</h3>
                 <!-- Descripción larga del anuncio -->
         <p>{{ $anuncio->long_description }}</p>
+        <!-- Precio del anuncio -->
+        <p class="price"><strong>{{ $anuncio->price }}€</strong></p>
                 <!-- Número de teléfono del anunciante -->
         <p><strong>{{ __('Phone') }}: </strong>{{ $anuncio->phone }}</p>
                 <!-- Dirección de correo electrónico del anunciante -->
