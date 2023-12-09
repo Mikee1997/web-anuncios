@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AnunciosController::class, 'mostrarAnuncios'])->name('index');
 
 // Detalle de un anuncio específico
-Route::get('/detalle/{idAnuncio}', [AnunciosController::class, 'detailAd'])->name('detailAd');
+Route::get('/detalle/{idAnuncio}', [AnunciosController::class, 'detailAd'])
+->name('detailAd');
 
 // Cambiar el idioma de la aplicación
 Route::get('change-language/{locale}', [Controller::class, 'changeLanguage'])
@@ -32,32 +33,47 @@ Route::get('change-language/{locale}', [Controller::class, 'changeLanguage'])
 // Grupo de rutas protegidas por el middleware de autenticación
 Route::middleware('auth')->group(function () {
     // Panel de control del usuario autenticado
-    Route::get('/dashboard', [AnunciosController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [AnunciosController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
     // Editar perfil del usuario
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])
+    ->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+    ->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+    ->name('profile.destroy');
 
     // Grupo de rutas relacionadas con los anuncios
     Route::name('ad.')->group(function () {
         // Crear un nuevo anuncio
-        Route::get('/crear-anuncio', [AnunciosController::class, 'createAd'])->name('create');
-        Route::post('/crear-anuncio', [AnunciosController::class, 'storeAd'])->name('store');
+        Route::get('/crear-anuncio', [AnunciosController::class, 'createAd'])
+        ->name('create');
+        Route::post('/crear-anuncio', [AnunciosController::class, 'storeAd'])
+        ->name('store');
         // Editar, actualizar y eliminar anuncio
-        Route::get('/anuncio/{id}', [AnunciosController::class, 'edit'])->name('edit');
-        Route::patch('/anuncio/{id}', [AnunciosController::class, 'update'])->name('update');
-        Route::delete('/anuncio/{id}', [AnunciosController::class, 'destroy'])->name('delete');
+        Route::get('/anuncio/{id}', [AnunciosController::class, 'edit'])
+        ->name('edit');
+        Route::patch('/anuncio/{id}', [AnunciosController::class, 'update'])
+        ->name('update');
+        Route::delete('/anuncio/{id}', [AnunciosController::class, 'destroy'])
+        ->name('delete');
         // Reservar un anuncio
-        Route::get('/reservar-anuncio/{id}', [AnunciosController::class, 'reserve'])->name('reserve');
-        Route::post('/reservar-anuncio/{id}', [AnunciosController::class, 'reserveSave'])->name('reserveSave');
+        Route::get('/reservar-anuncio/{id}', [AnunciosController::class, 'reserve'])
+        ->name('reserve');
+        Route::post('/reservar-anuncio/{id}', [AnunciosController::class, 'reserveSave'])
+        ->name('reserveSave');
         // Rutas con funcionalidades específicas para administradores
-        Route::get('/delivered-datatable/{pickpoint}', [AnunciosController::class, 'deliveredDatatable'])->name('deliveredDatatable')->middleware('admin');
-        Route::get('/reserved-datatable/{pickpoint}', [AnunciosController::class, 'reservedDatatable'])->name('reservedDatatable')->middleware('admin');
-        Route::get('/pte-datatable/{pickpoint}', [AnunciosController::class, 'pteDatatable'])->name('pteDatatable')->middleware('admin');
+        Route::get('/delivered-datatable/{pickpoint}', [AnunciosController::class, 'deliveredDatatable'])
+        ->name('deliveredDatatable')->middleware('admin');
+        Route::get('/reserved-datatable/{pickpoint}', [AnunciosController::class, 'reservedDatatable'])
+        ->name('reservedDatatable')->middleware('admin');
+        Route::get('/pte-datatable/{pickpoint}', [AnunciosController::class, 'pteDatatable'])
+        ->name('pteDatatable')->middleware('admin');
 
         //Ruta que permite listar los anuncios publicados por un usario
-        Route::get('/myAdsDatatable', [AnunciosController::class, 'myAdsDatatable'])->name('myAdsDatatable');
+        Route::get('/myAdsDatatable', [AnunciosController::class, 'myAdsDatatable'])
+        ->name('myAdsDatatable');
     });
 
     // Grupo de rutas relacionadas con los PickPoints (puntos de recogida)
