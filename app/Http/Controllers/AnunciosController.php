@@ -71,7 +71,7 @@ class AnunciosController extends Controller
     {
         $pickPoints = json_encode(array_keys($request->pickpoint));
         $object = Anuncio::find($id);
-        $updated = $object->update($request->only('title', 'short_description', 'long_description', 'phone', 'email') + ['pick_points' => $pickPoints]);
+        $updated = $object->update($request->only('title', 'short_description', 'long_description', 'phone', 'email','price') + ['pick_points' => $pickPoints]);
 
         if ($request->has('image')) {
             foreach ($object->getMedia('imagenes') as $media) {
@@ -113,7 +113,7 @@ class AnunciosController extends Controller
         $pickPoints = json_encode(array_keys($request->pickpoint));
 
 
-        $anuncio = Anuncio::create($request->only('title', 'short_description', 'long_description', 'phone', 'email') + ['user_id' => auth()->user()->id, 'pick_points' => $pickPoints, 'state' => 'publicado']);
+        $anuncio = Anuncio::create($request->only('title', 'short_description', 'long_description', 'phone', 'email','price') + ['user_id' => auth()->user()->id, 'pick_points' => $pickPoints, 'state' => 'publicado']);
 
         if ($request->has('image')) {
             $anuncio
